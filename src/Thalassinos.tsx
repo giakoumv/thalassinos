@@ -570,7 +570,7 @@ export default function ThalassinosWebsite() {
               
               <div style={styles.contactVisual}>
                 <div>
-                  <img src="media/images/pic1.jpg" alt="restaurant">
+                  <img src="media/images/pasta_seafood.jpg" alt="restaurant">
                   <p style={{fontSize: '20px', fontWeight: '300', color: '#cbd5e1'}}>
                     Where every sunset<br />
                     becomes a memory
