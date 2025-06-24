@@ -5,9 +5,8 @@ const TavernaWebsite: React.FC = () => {
     sand: "#fdf8f2",
     seaBlue: "#0077b6",
     skyBlue: "#00b4d8",
-    white: "#ffffff",
     textDark: "#1f2e3d",
-    accent: "#90e0ef",
+    white: "#ffffff",
   };
 
   const styles = {
@@ -20,13 +19,25 @@ const TavernaWebsite: React.FC = () => {
       lineHeight: 1.6,
     },
     hero: {
-      background: `linear-gradient(to right, ${colors.skyBlue}, ${colors.seaBlue})`,
+      backgroundImage: `url('/hero-bg.jpg')`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
       color: colors.white,
-      padding: "80px 20px",
+      padding: "100px 20px",
       textAlign: "center" as const,
+      position: "relative" as const,
+    },
+    heroOverlay: {
+      backgroundColor: "rgba(0, 0, 0, 0.4)",
+      padding: "60px 20px",
+    },
+    logo: {
+      width: "100px",
+      height: "auto",
+      marginBottom: "20px",
     },
     heroTitle: {
-      fontSize: "3.5rem",
+      fontSize: "3rem",
       marginBottom: "10px",
     },
     heroSubtitle: {
@@ -64,9 +75,6 @@ const TavernaWebsite: React.FC = () => {
       border: "none",
       transition: "background 0.3s ease",
     },
-    menuButtonHover: {
-      backgroundColor: colors.skyBlue,
-    },
     footer: {
       backgroundColor: colors.seaBlue,
       color: colors.white,
@@ -76,24 +84,27 @@ const TavernaWebsite: React.FC = () => {
     },
     footerText: {
       fontSize: "0.9rem",
-      opacity: 0.8,
+      opacity: 0.85,
     },
   };
 
   return (
     <div style={styles.container}>
       <header style={styles.hero}>
-        <h1 style={styles.heroTitle}>Thalassinos Taverna</h1>
-        <p style={styles.heroSubtitle}>
-          Authentic Greek seaside dining in Nea Plagia, Chalkidiki – where the waves meet the flavor
-        </p>
+        <div style={styles.heroOverlay}>
+          <img src="/logo.png" alt="Taverna Logo" style={styles.logo} />
+          <h1 style={styles.heroTitle}>Thalassinos Taverna</h1>
+          <p style={styles.heroSubtitle}>
+            Authentic seaside dining in Nea Plagia, Chalkidiki — Taste the Aegean
+          </p>
+        </div>
       </header>
 
       <section style={styles.section}>
         <h2 style={styles.sectionTitle}>Welcome</h2>
         <p style={styles.text}>
-          Our taverna sits right on the sand, offering an unforgettable view of the Aegean Sea. 
-          We serve traditional Greek dishes made with fresh, local ingredients. From grilled fish to flavorful meze and cool drinks, it’s the perfect setting for a relaxing meal under the sun or stars.
+          Step onto the sands and enjoy authentic Greek cuisine made with love and the freshest ingredients. 
+          At Thalassinos, we bring the flavors of the sea straight to your table—perfect for sunset dinners or midday snacks by the waves.
         </p>
         <a
           href="/menu.pdf"
@@ -103,7 +114,7 @@ const TavernaWebsite: React.FC = () => {
           onMouseOver={(e) => (e.currentTarget.style.backgroundColor = colors.skyBlue)}
           onMouseOut={(e) => (e.currentTarget.style.backgroundColor = colors.seaBlue)}
         >
-          View Full Menu (PDF)
+          View Menu (PDF)
         </a>
       </section>
 
