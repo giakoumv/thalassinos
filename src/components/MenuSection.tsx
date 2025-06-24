@@ -1,49 +1,6 @@
 import React from "react";
 
-const MenuSection: React.FC = () => {
-  const styles = {
-    section: {
-      backgroundColor: "rgba(255, 255, 255, 0.95)",
-      padding: "60px 20px",
-      maxWidth: "1000px",
-      margin: "0 auto",
-      borderRadius: "12px",
-    },
-    category: {
-      marginBottom: "40px",
-    },
-    heading: {
-      fontSize: "1.8rem",
-      color: "#0077b6",
-      borderBottom: "2px solid #00b4d8",
-      paddingBottom: "10px",
-      marginBottom: "20px",
-    },
-    item: {
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "flex-start",
-      marginBottom: "16px",
-    },
-    name: {
-      fontWeight: "bold" as const,
-      fontSize: "1rem",
-      marginRight: "20px",
-    },
-    description: {
-      fontSize: "0.95rem",
-      fontStyle: "italic",
-      color: "#444",
-      flex: 1,
-    },
-    price: {
-      fontWeight: "bold" as const,
-      marginLeft: "20px",
-      whiteSpace: "nowrap" as const,
-    },
-  };
-
-  const renderItem = (name: string, description: string, price: string) => (
+const renderItem = (name: string, description: string, price: string) => (
     <div style={styles.item}>
       <div>
         <div style={styles.name}>{name}</div>
@@ -52,7 +9,6 @@ const MenuSection: React.FC = () => {
       <div style={styles.price}>{price}</div>
     </div>
   );
-import React from "react";
 
 const MenuSection: React.FC = () => {
   const styles = {
