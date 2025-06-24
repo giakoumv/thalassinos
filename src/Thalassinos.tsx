@@ -1,5 +1,7 @@
 import React from "react";
 
+import MenuSection from './components/MenuSection';
+
 const TavernaWebsite: React.FC = () => {
   const colors = {
     sand: "#fdf8f2",
@@ -114,23 +116,11 @@ const TavernaWebsite: React.FC = () => {
           </p>
         </header>
 
-        <section style={styles.section}>
-          <h2 style={styles.sectionTitle}>Welcome</h2>
-          <p style={styles.text}>
-            Step onto the sands and enjoy authentic Greek cuisine made with love and the freshest ingredients.
-            At Thalassinos, we bring the flavors of the sea straight to your table—perfect for sunset dinners or midday snacks by the waves.
-          </p>
-          <a
-            href="/menu.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={styles.menuButton}
-            onMouseOver={(e) => (e.currentTarget.style.backgroundColor = colors.skyBlue)}
-            onMouseOut={(e) => (e.currentTarget.style.backgroundColor = colors.seaBlue)}
-          >
-            View Menu (PDF)
-          </a>
+       <section>
+          <h2>Our Menu</h2>
+          <MenuSection />
         </section>
+
 
         <footer style={styles.footer}>
           <p style={styles.footerText}>📍 Nea Plagia Beach, Chalkidiki — Tel: +30 23730 31024</p>
