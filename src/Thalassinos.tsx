@@ -10,34 +10,46 @@ const TavernaWebsite: React.FC = () => {
   };
 
   const styles = {
+    background: {
+      position: "fixed" as const,
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      backgroundImage: "url('/hero-bg.jpg')",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      zIndex: -2,
+    },
+    overlay: {
+      position: "fixed" as const,
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      backgroundColor: "rgba(0, 0, 0, 0.4)",
+      zIndex: -1,
+    },
     container: {
       fontFamily: "Segoe UI, Helvetica, sans-serif",
-      backgroundColor: colors.sand,
-      color: colors.textDark,
+      color: colors.white,
       margin: 0,
       padding: 0,
       lineHeight: 1.6,
-    },
-    hero: {
-      backgroundImage: `url('/hero-bg.jpg')`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      color: colors.white,
-      padding: "100px 20px",
-      textAlign: "center" as const,
       position: "relative" as const,
+      zIndex: 1,
     },
-    heroOverlay: {
-      backgroundColor: "rgba(0, 0, 0, 0.4)",
-      padding: "60px 20px",
+    header: {
+      textAlign: "center" as const,
+      padding: "100px 20px 60px",
     },
     logo: {
-      width: "100px",
+      width: "160px",
       height: "auto",
-      marginBottom: "20px",
+      marginBottom: "30px",
     },
     heroTitle: {
-      fontSize: "3rem",
+      fontSize: "3.5rem",
       marginBottom: "10px",
     },
     heroSubtitle: {
@@ -60,7 +72,7 @@ const TavernaWebsite: React.FC = () => {
       fontSize: "1.1rem",
       maxWidth: "700px",
       margin: "0 auto",
-      color: "#333",
+      color: colors.white,
     },
     menuButton: {
       display: "inline-block",
@@ -76,53 +88,56 @@ const TavernaWebsite: React.FC = () => {
       transition: "background 0.3s ease",
     },
     footer: {
-      backgroundColor: colors.seaBlue,
+      backgroundColor: "rgba(0, 119, 182, 0.85)",
       color: colors.white,
       textAlign: "center" as const,
       padding: "30px 20px",
-      marginTop: "40px",
+      marginTop: "60px",
     },
     footerText: {
       fontSize: "0.9rem",
-      opacity: 0.85,
+      opacity: 0.9,
     },
   };
 
   return (
-    <div style={styles.container}>
-      <header style={styles.hero}>
-        <div style={styles.heroOverlay}>
+    <>
+      <div style={styles.background}></div>
+      <div style={styles.overlay}></div>
+
+      <div style={styles.container}>
+        <header style={styles.header}>
           <img src="/logo.png" alt="Taverna Logo" style={styles.logo} />
           <h1 style={styles.heroTitle}>Thalassinos Taverna</h1>
           <p style={styles.heroSubtitle}>
             Authentic seaside dining in Nea Plagia, Chalkidiki — Taste the Aegean
           </p>
-        </div>
-      </header>
+        </header>
 
-      <section style={styles.section}>
-        <h2 style={styles.sectionTitle}>Welcome</h2>
-        <p style={styles.text}>
-          Step onto the sands and enjoy authentic Greek cuisine made with love and the freshest ingredients. 
-          At Thalassinos, we bring the flavors of the sea straight to your table—perfect for sunset dinners or midday snacks by the waves.
-        </p>
-        <a
-          href="/menu.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={styles.menuButton}
-          onMouseOver={(e) => (e.currentTarget.style.backgroundColor = colors.skyBlue)}
-          onMouseOut={(e) => (e.currentTarget.style.backgroundColor = colors.seaBlue)}
-        >
-          View Menu (PDF)
-        </a>
-      </section>
+        <section style={styles.section}>
+          <h2 style={styles.sectionTitle}>Welcome</h2>
+          <p style={styles.text}>
+            Step onto the sands and enjoy authentic Greek cuisine made with love and the freshest ingredients.
+            At Thalassinos, we bring the flavors of the sea straight to your table—perfect for sunset dinners or midday snacks by the waves.
+          </p>
+          <a
+            href="/menu.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={styles.menuButton}
+            onMouseOver={(e) => (e.currentTarget.style.backgroundColor = colors.skyBlue)}
+            onMouseOut={(e) => (e.currentTarget.style.backgroundColor = colors.seaBlue)}
+          >
+            View Menu (PDF)
+          </a>
+        </section>
 
-      <footer style={styles.footer}>
-        <p style={styles.footerText}>📍 Nea Plagia Beach, Chalkidiki — Tel: +30 23730 31024</p>
-        <p style={styles.footerText}>© {new Date().getFullYear()} Thalassinos Taverna</p>
-      </footer>
-    </div>
+        <footer style={styles.footer}>
+          <p style={styles.footerText}>📍 Nea Plagia Beach, Chalkidiki — Tel: +30 23730 31024</p>
+          <p style={styles.footerText}>© {new Date().getFullYear()} Thalassinos Taverna</p>
+        </footer>
+      </div>
+    </>
   );
 };
 
