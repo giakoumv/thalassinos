@@ -1,86 +1,115 @@
 import React from "react";
 
 const TavernaWebsite: React.FC = () => {
+  const colors = {
+    sand: "#fdf8f2",
+    seaBlue: "#0077b6",
+    skyBlue: "#00b4d8",
+    white: "#ffffff",
+    textDark: "#1f2e3d",
+    accent: "#90e0ef",
+  };
+
   const styles = {
     container: {
-      fontFamily: "Arial, sans-serif",
-      backgroundColor: "#f9f4e9",
-      color: "#2c2c2c",
-      minHeight: "100vh",
-      padding: "0",
-      margin: "0",
+      fontFamily: "Segoe UI, Helvetica, sans-serif",
+      backgroundColor: colors.sand,
+      color: colors.textDark,
+      margin: 0,
+      padding: 0,
+      lineHeight: 1.6,
     },
-    header: {
-      backgroundColor: "#fcefdc",
-      padding: "40px 20px",
+    hero: {
+      background: `linear-gradient(to right, ${colors.skyBlue}, ${colors.seaBlue})`,
+      color: colors.white,
+      padding: "80px 20px",
       textAlign: "center" as const,
-      borderBottom: "2px solid #e0d4b7",
     },
-    title: {
-      fontSize: "2.8rem",
-      margin: "0",
-      fontWeight: 700,
-      letterSpacing: "1px",
+    heroTitle: {
+      fontSize: "3.5rem",
+      marginBottom: "10px",
     },
-    subtitle: {
-      fontSize: "1.2rem",
-      marginTop: "10px",
-      color: "#5a5a5a",
+    heroSubtitle: {
+      fontSize: "1.3rem",
+      fontWeight: 300,
+      maxWidth: "600px",
+      margin: "0 auto",
     },
     section: {
-      padding: "40px 20px",
-      maxWidth: "800px",
+      padding: "60px 20px",
+      maxWidth: "900px",
       margin: "0 auto",
       textAlign: "center" as const,
     },
+    sectionTitle: {
+      fontSize: "2rem",
+      marginBottom: "20px",
+    },
+    text: {
+      fontSize: "1.1rem",
+      maxWidth: "700px",
+      margin: "0 auto",
+      color: "#333",
+    },
     menuButton: {
       display: "inline-block",
-      marginTop: "20px",
-      padding: "12px 24px",
-      backgroundColor: "#e7cfa1",
-      color: "#2c2c2c",
+      marginTop: "30px",
+      padding: "14px 30px",
+      backgroundColor: colors.seaBlue,
+      color: colors.white,
       textDecoration: "none",
       fontWeight: "bold",
-      borderRadius: "8px",
-      border: "1px solid #d4ba8f",
-      transition: "background-color 0.3s ease",
+      fontSize: "1rem",
+      borderRadius: "50px",
+      border: "none",
+      transition: "background 0.3s ease",
+    },
+    menuButtonHover: {
+      backgroundColor: colors.skyBlue,
     },
     footer: {
-      backgroundColor: "#fcefdc",
+      backgroundColor: colors.seaBlue,
+      color: colors.white,
       textAlign: "center" as const,
-      padding: "20px",
-      borderTop: "2px solid #e0d4b7",
+      padding: "30px 20px",
+      marginTop: "40px",
+    },
+    footerText: {
       fontSize: "0.9rem",
-      color: "#5a5a5a",
+      opacity: 0.8,
     },
   };
 
   return (
     <div style={styles.container}>
-      <header style={styles.header}>
-        <h1 style={styles.title}>Thalassinos Taverna</h1>
-        <p style={styles.subtitle}>Fresh seafood by the beach in Nea Plagia, Chalkidiki</p>
+      <header style={styles.hero}>
+        <h1 style={styles.heroTitle}>Thalassinos Taverna</h1>
+        <p style={styles.heroSubtitle}>
+          Authentic Greek seaside dining in Nea Plagia, Chalkidiki – where the waves meet the flavor
+        </p>
       </header>
 
       <section style={styles.section}>
-        <h2>Welcome to Our Seaside Taverna</h2>
-        <p>
-          Enjoy traditional Greek cuisine with fresh local ingredients, right on the sandy shores of Chalkidiki. 
-          Our menu includes seafood delicacies, meze platters, grilled meats, and refreshing beverages.
+        <h2 style={styles.sectionTitle}>Welcome</h2>
+        <p style={styles.text}>
+          Our taverna sits right on the sand, offering an unforgettable view of the Aegean Sea. 
+          We serve traditional Greek dishes made with fresh, local ingredients. From grilled fish to flavorful meze and cool drinks, it’s the perfect setting for a relaxing meal under the sun or stars.
         </p>
         <a
           href="/menu.pdf"
           target="_blank"
           rel="noopener noreferrer"
           style={styles.menuButton}
+          onMouseOver={(e) => (e.currentTarget.style.backgroundColor = colors.skyBlue)}
+          onMouseOut={(e) => (e.currentTarget.style.backgroundColor = colors.seaBlue)}
         >
-          View Our Menu (PDF)
+          View Full Menu (PDF)
         </a>
       </section>
 
       <footer style={styles.footer}>
-        <p>Nea Plagia Beach, Chalkidiki · Tel: 23730 31024</p>
-        <p>© {new Date().getFullYear()} Thalassinos Taverna. All rights reserved.</p>
+        <p style={styles.footerText}>📍 Nea Plagia Beach, Chalkidiki — Tel: +30 23730 31024</p>
+        <p style={styles.footerText}>© {new Date().getFullYear()} Thalassinos Taverna</p>
       </footer>
     </div>
   );
