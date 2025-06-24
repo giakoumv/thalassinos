@@ -24,18 +24,10 @@ export default function ThalassinosWebsite() {
     return () => observer.disconnect();
   }, []);
 
-  const menuItems = [
-    { category: "Fresh Catch", items: [
-      { name: "Grilled Sea Bass", price: "€24", desc: "With lemon & herbs" },
-      { name: "Mediterranean Prawns", price: "€28", desc: "Garlic & white wine" },
-      { name: "Seafood Platter", price: "€45", desc: "For two people" }
-    ]},
-    { category: "Traditional", items: [
-      { name: "Moussaka", price: "€18", desc: "Classic Greek layers" },
-      { name: "Souvlaki", price: "€16", desc: "Pork or chicken" },
-      { name: "Greek Salad", price: "€12", desc: "Feta & olives" }
-    ]}
-  ];
+  const [showPDF, setShowPDF] = useState(false);
+  
+  // Replace with your actual PDF path
+  const menuPDFPath = "/menu.pdf";
 
   const styles = {
     container: {
@@ -182,47 +174,83 @@ export default function ThalassinosWebsite() {
       alignItems: 'center',
       justifyContent: 'center'
     },
-    menuSection: {
-      marginBottom: '48px'
-    },
-    menuTitle: {
-      fontSize: '2rem',
-      fontWeight: '300',
-      color: '#1d4ed8',
-      borderBottom: '1px solid #dbeafe',
-      paddingBottom: '16px',
-      marginBottom: '32px'
-    },
-    menuItem: {
-      padding: '16px',
-      borderRadius: '16px',
-      transition: 'all 0.3s ease',
-      cursor: 'pointer',
-      marginBottom: '24px'
-    },
-    menuItemHover: {
-      backgroundColor: '#f8fafc'
-    },
-    menuItemHeader: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'flex-start',
-      marginBottom: '8px'
-    },
-    menuItemName: {
+    menuButton: {
+      backgroundColor: '#2563eb',
+      color: 'white',
+      padding: '20px 40px',
+      borderRadius: '50px',
+      border: 'none',
       fontSize: '20px',
       fontWeight: '500',
-      color: '#1e293b'
+      cursor: 'pointer',
+      transition: 'all 0.3s ease',
+      boxShadow: '0 10px 25px -5px rgba(37,99,235,0.3)',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '12px',
+      margin: '0 auto'
     },
-    menuItemPrice: {
-      fontSize: '20px',
-      fontWeight: '300',
-      color: '#2563eb',
-      marginLeft: '16px'
+    menuButtonHover: {
+      backgroundColor: '#1d4ed8',
+      transform: 'translateY(-2px)',
+      boxShadow: '0 20px 40px -10px rgba(37,99,235,0.4)'
     },
-    menuItemDesc: {
+    pdfModal: {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: 'rgba(0,0,0,0.9)',
+      zIndex: 1000,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '20px'
+    },
+    pdfContainer: {
+      backgroundColor: 'white',
+      borderRadius: '12px',
+      padding: '20px',
+      maxWidth: '90vw',
+      maxHeight: '90vh',
+      position: 'relative',
+      boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)'
+    },
+    closeButton: {
+      position: 'absolute',
+      top: '10px',
+      right: '15px',
+      backgroundColor: 'transparent',
+      border: 'none',
+      fontSize: '24px',
+      cursor: 'pointer',
       color: '#64748b',
-      fontWeight: '300'
+      zIndex: 1001,
+      width: '40px',
+      height: '40px',
+      borderRadius: '50%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    pdfEmbed: {
+      width: '80vw',
+      height: '80vh',
+      border: 'none',
+      borderRadius: '8px'
+    },
+    menuPreview: {
+      backgroundColor: '#f8fafc',
+      padding: '40px',
+      borderRadius: '16px',
+      textAlign: 'center',
+      border: '2px dashed #cbd5e1',
+      margin: '32px 0'
+    },
+    menuIcon: {
+      fontSize: '60px',
+      marginBottom: '16px'
     },
     reviewCard: {
       backgroundColor: 'white',
@@ -401,38 +429,64 @@ export default function ThalassinosWebsite() {
       <section id="menu" style={{...styles.section, ...styles.sectionWhite}}>
         <div style={styles.container}>
           <div style={styles.fadeInMenu}>
-            <h2 style={styles.sectionTitle}>Today's Menu</h2>
+            <h2 style={styles.sectionTitle}>Our Menu</h2>
             
-            <div style={{...styles.grid, ...styles.gridTwoCol}}>
-              {menuItems.map((section, idx) => (
-                <div key={idx} style={styles.menuSection}>
-                  <h3 style={styles.menuTitle}>{section.category}</h3>
-                  <div>
-                    {section.items.map((item, i) => (
-                      <div 
-                        key={i} 
-                        style={styles.menuItem}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = '#f8fafc';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = 'transparent';
-                        }}
-                      >
-                        <div style={styles.menuItemHeader}>
-                          <h4 style={styles.menuItemName}>{item.name}</h4>
-                          <span style={styles.menuItemPrice}>{item.price}</span>
-                        </div>
-                        <p style={styles.menuItemDesc}>{item.desc}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
+            <div style={{textAlign: 'center'}}>
+              <div style={styles.menuPreview}>
+                <div style={styles.menuIcon}>📋</div>
+                <h3 style={{fontSize: '24px', marginBottom: '16px', color: '#1e293b'}}>
+                  Today's Fresh Selection
+                </h3>
+                <p style={{color: '#64748b', marginBottom: '32px', fontSize: '18px'}}>
+                  Discover our daily specials featuring the freshest catch and traditional Greek favorites
+                </p>
+                <button 
+                  style={styles.menuButton}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#1d4ed8';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '0 20px 40px -10px rgba(37,99,235,0.4)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = '#2563eb';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 10px 25px -5px rgba(37,99,235,0.3)';
+                  }}
+                  onClick={() => setShowPDF(true)}
+                >
+                  <span>📄</span>
+                  View Full Menu
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </section>
+
+      {/* PDF Modal */}
+      {showPDF && (
+        <div style={styles.pdfModal} onClick={() => setShowPDF(false)}>
+          <div style={styles.pdfContainer} onClick={(e) => e.stopPropagation()}>
+            <button 
+              style={styles.closeButton}
+              onClick={() => setShowPDF(false)}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f1f5f9';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}
+            >
+              ✕
+            </button>
+            <embed
+              src={menuPDFPath}
+              type="application/pdf"
+              style={styles.pdfEmbed}
+            />
+          </div>
+        </div>
+      )}
 
       {/* Reviews Section */}
       <section id="reviews" style={{...styles.section, ...styles.sectionGray}}>
