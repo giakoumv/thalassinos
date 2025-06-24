@@ -5,16 +5,6 @@ export default function ThalassinosWebsite() {
   const [isVisible, setIsVisible] = useState({});
 
   useEffect(() => {
-    // Add Tailwind CSS if not already present
-    if (!document.querySelector('link[href*="tailwindcss"]')) {
-      const link = document.createElement('link');
-      link.href = 'https://cdn.tailwindcss.com';
-      link.rel = 'stylesheet';
-      document.head.appendChild(link);
-    }
-  }, []);
-
-  useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -47,69 +37,360 @@ export default function ThalassinosWebsite() {
     ]}
   ];
 
+  const styles = {
+    container: {
+      minHeight: '100vh',
+      backgroundColor: '#f8fafc',
+      color: '#0f172a',
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+    },
+    heroSection: {
+      position: 'relative',
+      height: '100vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      overflow: 'hidden'
+    },
+    heroBackground: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      background: 'linear-gradient(to bottom right, #2563eb, #1d4ed8, #0891b2)',
+      transform: `translateY(${scrollY * 0.5}px)`
+    },
+    heroOverlay: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: 'rgba(0,0,0,0.2)'
+    },
+    floatingElement1: {
+      position: 'absolute',
+      top: '80px',
+      left: '40px',
+      color: 'rgba(255,255,255,0.3)',
+      fontSize: '30px',
+      animation: 'bounce 2s infinite'
+    },
+    floatingElement2: {
+      position: 'absolute',
+      bottom: '128px',
+      right: '64px',
+      color: 'rgba(255,255,255,0.3)',
+      fontSize: '24px',
+      animation: 'pulse 2s infinite'
+    },
+    heroContent: {
+      position: 'relative',
+      zIndex: 10,
+      textAlign: 'center',
+      color: 'white',
+      padding: '0 24px'
+    },
+    heroTitle: {
+      fontSize: 'clamp(4rem, 8vw, 8rem)',
+      fontWeight: '300',
+      marginBottom: '24px',
+      letterSpacing: '0.1em'
+    },
+    heroDivider: {
+      width: '128px',
+      height: '1px',
+      backgroundColor: 'rgba(255,255,255,0.6)',
+      margin: '0 auto 32px auto'
+    },
+    heroSubtitle: {
+      fontSize: 'clamp(1.25rem, 3vw, 2rem)',
+      fontWeight: '300',
+      opacity: 0.9,
+      maxWidth: '800px',
+      margin: '0 auto',
+      lineHeight: 1.6
+    },
+    scrollIndicator: {
+      position: 'absolute',
+      bottom: '32px',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      color: 'rgba(255,255,255,0.8)',
+      textAlign: 'center',
+      animation: 'bounce 2s infinite'
+    },
+    scrollLine: {
+      width: '1px',
+      height: '64px',
+      backgroundColor: 'rgba(255,255,255,0.4)',
+      margin: '0 auto 8px auto'
+    },
+    section: {
+      padding: '96px 24px'
+    },
+    sectionWhite: {
+      backgroundColor: 'white'
+    },
+    sectionGray: {
+      background: 'linear-gradient(to bottom right, #f1f5f9, #e0f2fe)'
+    },
+    sectionDark: {
+      backgroundColor: '#0f172a',
+      color: 'white'
+    },
+    container: {
+      maxWidth: '1200px',
+      margin: '0 auto'
+    },
+    sectionTitle: {
+      fontSize: 'clamp(2.5rem, 5vw, 5rem)',
+      fontWeight: '300',
+      marginBottom: '64px',
+      color: '#1e293b',
+      textAlign: 'center'
+    },
+    sectionTitleWhite: {
+      color: 'white'
+    },
+    grid: {
+      display: 'grid',
+      gap: '64px',
+      alignItems: 'center'
+    },
+    gridTwoCol: {
+      gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))'
+    },
+    gridThreeCol: {
+      gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+      gap: '32px'
+    },
+    aboutText: {
+      fontSize: '18px',
+      color: '#64748b',
+      lineHeight: 1.7,
+      marginBottom: '24px'
+    },
+    aboutImage: {
+      aspectRatio: '1/1',
+      background: 'linear-gradient(to bottom right, #dbeafe, #e0f2fe)',
+      borderRadius: '24px',
+      padding: '32px',
+      boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    menuSection: {
+      marginBottom: '48px'
+    },
+    menuTitle: {
+      fontSize: '2rem',
+      fontWeight: '300',
+      color: '#1d4ed8',
+      borderBottom: '1px solid #dbeafe',
+      paddingBottom: '16px',
+      marginBottom: '32px'
+    },
+    menuItem: {
+      padding: '16px',
+      borderRadius: '16px',
+      transition: 'all 0.3s ease',
+      cursor: 'pointer',
+      marginBottom: '24px'
+    },
+    menuItemHover: {
+      backgroundColor: '#f8fafc'
+    },
+    menuItemHeader: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'flex-start',
+      marginBottom: '8px'
+    },
+    menuItemName: {
+      fontSize: '20px',
+      fontWeight: '500',
+      color: '#1e293b'
+    },
+    menuItemPrice: {
+      fontSize: '20px',
+      fontWeight: '300',
+      color: '#2563eb',
+      marginLeft: '16px'
+    },
+    menuItemDesc: {
+      color: '#64748b',
+      fontWeight: '300'
+    },
+    reviewCard: {
+      backgroundColor: 'white',
+      padding: '32px',
+      borderRadius: '24px',
+      boxShadow: '0 10px 25px -5px rgba(0,0,0,0.1)',
+      transition: 'all 0.3s ease',
+      cursor: 'pointer'
+    },
+    reviewCardHover: {
+      boxShadow: '0 20px 40px -10px rgba(0,0,0,0.15)',
+      transform: 'translateY(-8px)'
+    },
+    stars: {
+      display: 'flex',
+      marginBottom: '16px'
+    },
+    star: {
+      color: '#fbbf24',
+      fontSize: '20px'
+    },
+    reviewText: {
+      color: '#64748b',
+      fontWeight: '300',
+      lineHeight: 1.7,
+      marginBottom: '24px',
+      fontStyle: 'italic'
+    },
+    reviewAuthor: {
+      fontWeight: '500',
+      color: '#1e293b'
+    },
+    contactGrid: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+      gap: '64px'
+    },
+    contactItem: {
+      display: 'flex',
+      alignItems: 'flex-start',
+      gap: '16px',
+      marginBottom: '32px'
+    },
+    contactIcon: {
+      fontSize: '24px',
+      color: '#60a5fa',
+      marginTop: '4px'
+    },
+    contactLabel: {
+      fontWeight: '500',
+      marginBottom: '4px'
+    },
+    contactText: {
+      color: '#cbd5e1',
+      fontWeight: '300'
+    },
+    contactVisual: {
+      aspectRatio: '1/1',
+      background: 'linear-gradient(to bottom right, rgba(37,99,235,0.2), rgba(8,145,178,0.2))',
+      borderRadius: '24px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      textAlign: 'center'
+    },
+    footer: {
+      padding: '48px 24px',
+      backgroundColor: '#020617',
+      color: '#64748b',
+      textAlign: 'center'
+    },
+    footerTitle: {
+      fontSize: '2rem',
+      fontWeight: '300',
+      marginBottom: '16px',
+      color: 'white'
+    },
+    footerDivider: {
+      width: '64px',
+      height: '1px',
+      backgroundColor: '#334155',
+      margin: '0 auto 24px auto'
+    },
+    fadeIn: {
+      transition: 'all 1s ease',
+      transform: isVisible.about ? 'translateY(0)' : 'translateY(80px)',
+      opacity: isVisible.about ? 1 : 0
+    },
+    fadeInMenu: {
+      transition: 'all 1s ease',
+      transform: isVisible.menu ? 'translateY(0)' : 'translateY(80px)',
+      opacity: isVisible.menu ? 1 : 0
+    },
+    fadeInReviews: {
+      transition: 'all 1s ease',
+      transform: isVisible.reviews ? 'translateY(0)' : 'translateY(80px)',
+      opacity: isVisible.reviews ? 1 : 0
+    },
+    fadeInContact: {
+      transition: 'all 1s ease',
+      transform: isVisible.contact ? 'translateY(0)' : 'translateY(80px)',
+      opacity: isVisible.contact ? 1 : 0
+    }
+  };
+
+  // Add CSS animations
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes bounce {
+        0%, 20%, 53%, 80%, 100% { transform: translateY(0); }
+        40%, 43% { transform: translateY(-30px); }
+        70% { transform: translateY(-15px); }
+        90% { transform: translateY(-4px); }
+      }
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+      }
+    `;
+    document.head.appendChild(style);
+    return () => document.head.removeChild(style);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
+    <div style={styles.container}>
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-gradient-to-br from-blue-600 via-blue-700 to-cyan-600"
-          style={{ transform: `translateY(${scrollY * 0.5}px)` }}
-        />
-        <div className="absolute inset-0 bg-black/20" />
+      <section style={styles.heroSection}>
+        <div style={styles.heroBackground} />
+        <div style={styles.heroOverlay} />
         
         {/* Floating Elements */}
-        <div className="absolute top-20 left-10 text-white/30 animate-bounce">
-          <div className="w-10 h-10 flex items-center justify-center text-3xl">〜</div>
-        </div>
-        <div className="absolute bottom-32 right-16 text-white/30 animate-pulse">
-          <div className="w-8 h-8 flex items-center justify-center text-2xl">🐟</div>
-        </div>
+        <div style={styles.floatingElement1}>〜</div>
+        <div style={styles.floatingElement2}>🐟</div>
         
-        <div className="relative z-10 text-center text-white px-6">
-          <div className="animate-fade-in">
-            <h1 className="text-7xl md:text-8xl font-light mb-6 tracking-wide">
-              Thalassinos
-            </h1>
-            <div className="w-32 h-px bg-white/60 mx-auto mb-8"></div>
-            <p className="text-xl md:text-2xl font-light opacity-90 max-w-2xl mx-auto leading-relaxed">
-              Where the Aegean meets authentic flavors
-            </p>
-          </div>
+        <div style={styles.heroContent}>
+          <h1 style={styles.heroTitle}>Thalassinos</h1>
+          <div style={styles.heroDivider}></div>
+          <p style={styles.heroSubtitle}>
+            Where the Aegean meets authentic flavors
+          </p>
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/80 animate-bounce">
-          <div className="w-px h-16 bg-white/40 mx-auto mb-2"></div>
-          <div className="text-sm font-light">Scroll</div>
+        <div style={styles.scrollIndicator}>
+          <div style={styles.scrollLine}></div>
+          <div style={{fontSize: '14px', fontWeight: '300'}}>Scroll</div>
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-24 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className={`transition-all duration-1000 transform ${isVisible.about ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
-            <div className="grid md:grid-cols-2 gap-16 items-center">
+      <section id="about" style={{...styles.section}}>
+        <div style={styles.container}>
+          <div style={styles.fadeIn}>
+            <div style={{...styles.grid, ...styles.gridTwoCol}}>
               <div>
-                <h2 className="text-5xl font-light mb-8 text-slate-800">
-                  Our Story
-                </h2>
-                <div className="space-y-6 text-lg text-slate-600 leading-relaxed">
-                  <p>
-                    For three generations, Thalassinos has been serving the freshest catch 
-                    and traditional Greek cuisine on the shores of the Mediterranean.
-                  </p>
-                  <p>
-                    Our family recipes, passed down through time, blend with the daily 
-                    harvest from local fishermen to create an authentic dining experience.
-                  </p>
+                <h2 style={styles.sectionTitle}>Our Story</h2>
+                <div style={styles.aboutText}>
+                  For three generations, Thalassinos has been serving the freshest catch 
+                  and traditional Greek cuisine on the shores of the Mediterranean.
+                </div>
+                <div style={styles.aboutText}>
+                  Our family recipes, passed down through time, blend with the daily 
+                  harvest from local fishermen to create an authentic dining experience.
                 </div>
               </div>
-              <div className="relative">
-                <div className="aspect-square bg-gradient-to-br from-blue-100 to-cyan-50 rounded-3xl p-8 shadow-2xl">
-                  <div className="h-full flex items-center justify-center">
-                    <div className="text-8xl text-blue-600/30">🍽️</div>
-                  </div>
-                </div>
+              <div style={styles.aboutImage}>
+                <div style={{fontSize: '80px', color: 'rgba(37,99,235,0.3)'}}>🍽️</div>
               </div>
             </div>
           </div>
@@ -117,33 +398,32 @@ export default function ThalassinosWebsite() {
       </section>
 
       {/* Menu Section */}
-      <section id="menu" className="py-24 bg-white">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className={`transition-all duration-1000 transform ${isVisible.menu ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
-            <h2 className="text-5xl font-light text-center mb-16 text-slate-800">
-              Today's Menu
-            </h2>
+      <section id="menu" style={{...styles.section, ...styles.sectionWhite}}>
+        <div style={styles.container}>
+          <div style={styles.fadeInMenu}>
+            <h2 style={styles.sectionTitle}>Today's Menu</h2>
             
-            <div className="grid md:grid-cols-2 gap-12">
+            <div style={{...styles.grid, ...styles.gridTwoCol}}>
               {menuItems.map((section, idx) => (
-                <div key={idx} className="space-y-8">
-                  <h3 className="text-3xl font-light text-blue-700 border-b border-blue-100 pb-4">
-                    {section.category}
-                  </h3>
-                  <div className="space-y-6">
+                <div key={idx} style={styles.menuSection}>
+                  <h3 style={styles.menuTitle}>{section.category}</h3>
+                  <div>
                     {section.items.map((item, i) => (
-                      <div key={i} className="group hover:bg-slate-50 p-4 rounded-2xl transition-all duration-300">
-                        <div className="flex justify-between items-start mb-2">
-                          <h4 className="text-xl font-medium text-slate-800 group-hover:text-blue-700 transition-colors">
-                            {item.name}
-                          </h4>
-                          <span className="text-xl font-light text-blue-600 ml-4">
-                            {item.price}
-                          </span>
+                      <div 
+                        key={i} 
+                        style={styles.menuItem}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = '#f8fafc';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                        }}
+                      >
+                        <div style={styles.menuItemHeader}>
+                          <h4 style={styles.menuItemName}>{item.name}</h4>
+                          <span style={styles.menuItemPrice}>{item.price}</span>
                         </div>
-                        <p className="text-slate-600 font-light">
-                          {item.desc}
-                        </p>
+                        <p style={styles.menuItemDesc}>{item.desc}</p>
                       </div>
                     ))}
                   </div>
@@ -155,31 +435,36 @@ export default function ThalassinosWebsite() {
       </section>
 
       {/* Reviews Section */}
-      <section id="reviews" className="py-24 bg-gradient-to-br from-slate-100 to-blue-50">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className={`transition-all duration-1000 transform ${isVisible.reviews ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
-            <h2 className="text-5xl font-light text-center mb-16 text-slate-800">
-              What Our Guests Say
-            </h2>
+      <section id="reviews" style={{...styles.section, ...styles.sectionGray}}>
+        <div style={styles.container}>
+          <div style={styles.fadeInReviews}>
+            <h2 style={styles.sectionTitle}>What Our Guests Say</h2>
             
-            <div className="grid md:grid-cols-3 gap-8">
+            <div style={{...styles.grid, ...styles.gridThreeCol}}>
               {[
                 { name: "Maria K.", text: "The freshest seafood I've ever tasted. The sunset view is magical!" },
                 { name: "James R.", text: "Authentic Greek hospitality. Every dish tells a story of tradition." },
                 { name: "Sofia P.", text: "Three generations of perfection. This place is a true gem by the sea." }
               ].map((review, idx) => (
-                <div key={idx} className="bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-                  <div className="flex mb-4">
+                <div 
+                  key={idx} 
+                  style={styles.reviewCard}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow = '0 20px 40px -10px rgba(0,0,0,0.15)';
+                    e.currentTarget.style.transform = 'translateY(-8px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = '0 10px 25px -5px rgba(0,0,0,0.1)';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                  }}
+                >
+                  <div style={styles.stars}>
                     {[...Array(5)].map((_, i) => (
-                      <span key={i} className="text-yellow-400 text-xl">★</span>
+                      <span key={i} style={styles.star}>★</span>
                     ))}
                   </div>
-                  <p className="text-slate-600 mb-6 font-light leading-relaxed">
-                    "{review.text}"
-                  </p>
-                  <div className="font-medium text-slate-800">
-                    {review.name}
-                  </div>
+                  <p style={styles.reviewText}>"{review.text}"</p>
+                  <div style={styles.reviewAuthor}>{review.name}</div>
                 </div>
               ))}
             </div>
@@ -188,42 +473,40 @@ export default function ThalassinosWebsite() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-24 bg-slate-900 text-white">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className={`transition-all duration-1000 transform ${isVisible.contact ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
-            <div className="grid md:grid-cols-2 gap-16">
+      <section id="contact" style={{...styles.section, ...styles.sectionDark}}>
+        <div style={styles.container}>
+          <div style={styles.fadeInContact}>
+            <div style={styles.contactGrid}>
               <div>
-                <h2 className="text-5xl font-light mb-12">
-                  Visit Us
-                </h2>
-                <div className="space-y-8">
-                  <div className="flex items-start space-x-4">
-                    <div className="text-blue-400 mt-1 text-2xl">📍</div>
+                <h2 style={{...styles.sectionTitle, ...styles.sectionTitleWhite}}>Visit Us</h2>
+                <div>
+                  <div style={styles.contactItem}>
+                    <div style={styles.contactIcon}>📍</div>
                     <div>
-                      <div className="font-medium mb-1">Location</div>
-                      <div className="text-slate-300 font-light">
+                      <div style={styles.contactLabel}>Location</div>
+                      <div style={styles.contactText}>
                         Seaside Promenade 15<br />
                         Mykonos, Greece
                       </div>
                     </div>
                   </div>
                   
-                  <div className="flex items-start space-x-4">
-                    <div className="text-blue-400 mt-1 text-2xl">🕐</div>
+                  <div style={styles.contactItem}>
+                    <div style={styles.contactIcon}>🕐</div>
                     <div>
-                      <div className="font-medium mb-1">Hours</div>
-                      <div className="text-slate-300 font-light">
+                      <div style={styles.contactLabel}>Hours</div>
+                      <div style={styles.contactText}>
                         Daily: 12:00 PM - 12:00 AM<br />
                         Kitchen closes at 11:30 PM
                       </div>
                     </div>
                   </div>
                   
-                  <div className="flex items-start space-x-4">
-                    <div className="text-blue-400 mt-1 text-2xl">📞</div>
+                  <div style={styles.contactItem}>
+                    <div style={styles.contactIcon}>📞</div>
                     <div>
-                      <div className="font-medium mb-1">Reservations</div>
-                      <div className="text-slate-300 font-light">
+                      <div style={styles.contactLabel}>Reservations</div>
+                      <div style={styles.contactText}>
                         +30 22890 XXXXX
                       </div>
                     </div>
@@ -231,15 +514,13 @@ export default function ThalassinosWebsite() {
                 </div>
               </div>
               
-              <div className="relative">
-                <div className="aspect-square bg-gradient-to-br from-blue-600/20 to-cyan-600/20 rounded-3xl flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-6xl text-blue-400/40 mx-auto mb-6">🌊</div>
-                    <p className="text-xl font-light text-slate-300">
-                      Where every sunset<br />
-                      becomes a memory
-                    </p>
-                  </div>
+              <div style={styles.contactVisual}>
+                <div>
+                  <div style={{fontSize: '60px', color: 'rgba(96,165,250,0.4)', marginBottom: '24px'}}>🌊</div>
+                  <p style={{fontSize: '20px', fontWeight: '300', color: '#cbd5e1'}}>
+                    Where every sunset<br />
+                    becomes a memory
+                  </p>
                 </div>
               </div>
             </div>
@@ -248,13 +529,11 @@ export default function ThalassinosWebsite() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 bg-slate-950 text-slate-400 text-center">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-3xl font-light mb-4 text-white">
-            Thalassinos
-          </div>
-          <div className="w-16 h-px bg-slate-700 mx-auto mb-6"></div>
-          <p className="font-light">
+      <footer style={styles.footer}>
+        <div style={styles.container}>
+          <div style={styles.footerTitle}>Thalassinos</div>
+          <div style={styles.footerDivider}></div>
+          <p style={{fontWeight: '300'}}>
             © 2025 Thalassinos Seaside Taverna. Taste the tradition.
           </p>
         </div>
